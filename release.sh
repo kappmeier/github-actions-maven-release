@@ -70,6 +70,9 @@ ls -l $M2_HOME/repository | true
 echo "Current directory: '$(pwd)'"
 ls -l
 
+SETTINGS_LOCATION=".github/workflows/.maven.settings.xml"
+cp $SETTINGS_LOCATION /usr/share/maven/conf/settings.xml
+
 # prepare release
 echo "Do mvn release:prepare with arguments $MAVEN_ARGS"
 mvn $MAVEN_SETTINGS_OPTION $MAVEN_REPO_LOCAL -Dusername=$GITHUB_ACCESS_TOKEN release:prepare -B -Darguments="$MAVEN_ARGS"
