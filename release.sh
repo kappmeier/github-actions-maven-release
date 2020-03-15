@@ -65,6 +65,7 @@ mvn $MAVEN_SETTINGS_OPTION $MAVEN_REPO_LOCAL -Dusername=$GITHUB_ACCESS_TOKEN rel
 
 # do release if prepare did not fail
 if [[ ("$?" -eq 0) && ($SKIP_PERFORM == "false") ]]; then
+     echo mvn $MAVEN_SETTINGS_OPTION $MAVEN_REPO_LOCAL -Dusername=$GITHUB_ACCESS_TOKEN release:prepare -B -Darguments="$MAVEN_ARGS"
      echo "Do mvn release:perform with arguments $MAVEN_ARGS"
      mvn $MAVEN_SETTINGS_OPTION $MAVEN_REPO_LOCAL release:perform -B -Darguments="$MAVEN_ARGS"
 fi
