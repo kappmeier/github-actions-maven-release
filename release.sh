@@ -63,9 +63,9 @@ ls -l /usr/share/maven/conf || true
 cat /usr/share/maven/conf/settings.xml || true
 ls -l ~/.m2/ || true
 cat ~/.m2/settings.xml || true
-echo $M2_HOME
-ls -l $M2_HOME
-ls -l $M2_HOME/repository
+echo "M2_HOME: $M2_HOME"
+ls -l $M2_HOME | true
+ls -l $M2_HOME/repository | true
 
 echo "Current directory: '$(pwd)'"
 ls -l
