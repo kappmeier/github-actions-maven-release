@@ -59,6 +59,17 @@ fi
 echo "Move to folder $MAVEN_PROJECT_FOLDER"
 cd $MAVEN_PROJECT_FOLDER
 
+ls -l /usr/share/maven/conf || true
+cat /usr/share/maven/conf/settings.xml || true
+ls -l ~/.m2/ || true
+cat ~/.m2/settings.xml || true
+echo $M2_HOME
+ls -l $M2_HOME
+ls -l $M2_HOME/repository
+
+echo "Current directory: '$(pwd)'"
+ls -l
+
 # prepare release
 echo "Do mvn release:prepare with arguments $MAVEN_ARGS"
 mvn $MAVEN_SETTINGS_OPTION $MAVEN_REPO_LOCAL -Dusername=$GITHUB_ACCESS_TOKEN release:prepare -B -Darguments="$MAVEN_ARGS"
@@ -66,18 +77,6 @@ mvn $MAVEN_SETTINGS_OPTION $MAVEN_REPO_LOCAL -Dusername=$GITHUB_ACCESS_TOKEN rel
 # do release if prepare did not fail
 if [[ ("$?" -eq 0) && ($SKIP_PERFORM == "false") ]]; then
      echo mvn $MAVEN_SETTINGS_OPTION $MAVEN_REPO_LOCAL -Dusername=$GITHUB_ACCESS_TOKEN release:prepare -B -Darguments="$MAVEN_ARGS"
-
-     ll /usr/share/maven/conf || true
-     cat /usr/share/maven/conf/setings.xml || true
-     ll ~/.m2/ || true
-     cat ~/.m2/settings.xml || true
-     echo $M2_HOME
-     ll $M2_HOME
-     ll $M2_HOME/repository
-
-     pwd
-     ll
-
      echo "Do mvn release:perform with arguments $MAVEN_ARGS"
      mvn $MAVEN_SETTINGS_OPTION $MAVEN_REPO_LOCAL release:perform -B -Darguments="$MAVEN_ARGS"
 fi
