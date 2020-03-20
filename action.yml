@@ -58,6 +58,10 @@ inputs:
     description: 'Github access token. https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line'
     required: true
 
+  settings-file:
+    description: 'Location of a settings.xml file that should be used by the maven release process.'
+    required: false
+
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -83,3 +87,6 @@ runs:
     GIT_RELEASE_BOT_EMAIL: ${{ inputs.git-release-bot-email }}
 
     GITHUB_ACCESS_TOKEN: ${{ inputs.access-token }}
+
+    SETTINGS_FILE: ${{ inputs.settings-file }}
+

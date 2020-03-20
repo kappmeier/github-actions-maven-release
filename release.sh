@@ -70,9 +70,10 @@ ls -l $M2_HOME/repository | true
 echo "Current directory: '$(pwd)'"
 ls -l
 
-#SETTINGS_LOCATION=".github/workflows/.maven.settings.xml"
-SETTINGS_LOCATION="./settings.xml"
-cp $SETTINGS_LOCATION /usr/share/maven/conf/settings.xml
+# Use custom settings file, if available
+if [[ -n "$SETTINGS_FILE" ]]; then
+    cp $SETTINGS_FILE /usr/share/maven/conf/settings.xml
+fi
 
 # prepare release
 echo "Do mvn release:prepare with arguments $MAVEN_ARGS"
