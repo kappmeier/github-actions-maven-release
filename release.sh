@@ -40,7 +40,7 @@ if [[ $GPG_ENABLED == "true" ]]; then
      echo "GPG_KEY_ID = $GPG_KEY_ID"
      echo "Import the GPG key"
      echo  "$GPG_KEY" | base64 -d > private.key
-     gpg --import ./private.key
+     gpg --batch --pinentry-mode loopback --import ./private.key
      rm ./private.key
 else
   echo "GPG signing is not enabled"
